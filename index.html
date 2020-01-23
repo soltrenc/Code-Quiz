@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <header>
+        <title> Code Quiz </title>
+        <nav class="nav">
+            <a class="nav-link active" href="#">High Scores</a>
+        </nav>
+
+
+    </header>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="script" href="script.js">
+
+</head>
+
+<body>
+
+    <div class="grid">
+        <div id="quiz">
+            <h1> Coding Quiz </h1>
+        </div>
+        <div class="row">
+            <p style="margin-left: 20px;"> Are you ready to test your knowledge on Javascript?! Click the start button
+                to begin the 75 second timed
+                quiz.
+                If you get a question wrong, you will lose 10 seconds which will be deducted from the timer.
+        </div>
+        <div class="row">
+            <button id="start"> Start Quiz </button>
+        </div>
+        </p>
+        <div id="quiz" style="display :none;">
+            <p id="question"> </p>
+            <div id="timer">
+                <div id="counter"> 75 </div>
+            </div>
+            <div id="answers">
+                <div class="answer" id="A" onclick="checkAnswer('A')"> A </div>
+                <div class="answer" id="B" onclick="checkAnswer('B')"> B </div>
+                <div class="answer" id="C" onclick="checkAnswer('C')"> C </div>
+                <div class="answer" id="D" onclick="checkAnswer('D')"> D </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Set the date we're counting down to
+        var countdownTimer = 100;
+
+        function start() {
+            console.log(countdownTimer);
+        }
+
+        console.log('button', document.querySelector('#start'));
+        document.querySelector("#start").addEventListener('click', function () {
+            setInterval(countdown, 6000);
+
+        })
+        function countdown() {
+            countdownTimer--;
+        }
+
+    </script>
+
+</body>
+
+</html>
