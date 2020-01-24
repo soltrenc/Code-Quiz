@@ -2,110 +2,103 @@ var start = document.getElementById("start");
 var quiz = document.getElementById("quiz");
 var question = document.getElementById("question");
 var counter = document.getElementById("counter");
-var timer = document.getElementById("timer");
 var progress = document.getElementById("progress");
 var highscores = document.getElementById("highscores");
 
-var answerA = document.getElementById("A");
-var answerB = document.getElementById("B");
-var answerC = document.getElementById("C");
-var answerD = document.getElementById("D");
+var answer0 = document.getElementById("0");
+var answer1 = document.getElementById("1");
+var answer2 = document.getElementById("2");
+var answer3 = document.getElementById("3");
 
 let questions = [
     {
         question: "Commonly used data types are known as:",
-        answerA: "Strings",
-        answerB: "Booleans",
-        answerC: "Alerts",
-        answerD: "Numbers",
+        answers: ["Strings",
+            "Booleans",
+            "Alerts",
+            "Numbers"],
         correct: "A"
     },
     {
         question: "The condition in an if else statement is enclosed within ____",
-        answerA: "Quotes",
-        answerB: "Curly Brackets",
-        answerC: "Parenthesis",
-        answerD: "Square Brackets",
+        answers: ["Quotes",
+            "Curly Brackets",
+            "Parenthesis",
+            "Square Brackets"],
         correct: "C"
     },
     {
         question: "Arrays in Javascript can be used to store ___",
-        answerA: "Numbers and Strings",
-        answerB: "Other Arrays",
-        answerC: "Booleans",
-        answerD: "All of the Above",
+        answers: ["Numbers and Strings",
+            "Other Arrays",
+            "Booleans",
+            "All of the Above"],
         correct: "D"
     },
     {
         question: "String values must be enclosed within ___ when being assigned to variables.",
-        answerA: "Commas",
-        answerB: "Curly Brackets",
-        answerC: "Quotes",
-        answerD: "Parenthesis",
+        answers: ["Commas",
+            "Curly Brackets",
+            "Quotes",
+            "Parenthesis"],
         correct: "C"
     },
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
-        answerA: "Javascript",
-        answerB: "Terminal|Bash",
-        answerC: "For Loops",
-        answerD: "console.log",
+        answers: ["Javascript",
+            "Terminal|Bash",
+            "For Loops",
+            "console.log"],
         correct: "D"
     }
 ];
 
 var lastqIndex = questions.length - 1;
 var runningqIndex = 0;
+
 function renderQuestions() {
     var q = questions[runningqIndex];
-    question.innerHTML = "<p>" + q.question + "</p>";
-    answerA.innerHTML = q.answerA;
-    answerB.innerHTML = q.answerB;
-    answerC.innerHTML = q.answerC;
-    answerD.innerHTML = q.answerD;
+    console.log("Q", q.question);
+    let p = document.getElementById("question");
+    p.innerHTML = q.question;
+    document.getElementById("question").append("p");
+    for (var i = 0; i < 4; i++) {
+        let li = document.createElement("li");
+        li.innerHTML = q.answers[i];
+        document.getElementById(i).append(li);
+    }
+    startTimer();
+
 
 }
 
 runningqIndex = 0;
-renderQuestions();
-
 var score = 0;
 
-function checkAnswer(answer) {
-    if (questions[runningqIndex].correct == answer) {
-        score++;
-    } else {
-        answerIsWrong(deductTimer)
-    }
+function startTimer() {
+    var timer = 75;
+    console.log('button', document.querySelector('#start'));
+    var timerid = setInterval(function () {
+        timer--;
+        counter.innerHTML = timer;
+        console.log(timer);
+        if (timer <= 0) {
+            counter.innerHTML = "Time's Up!";
+            clearInterval(timerid);
+        } else {
+            if (runningqIndex < lastqIndex) {
+                runningqIndex++;
+            } else {
+                setTimeout(timer - 10);
+            }
+        }
+    }, 1000);
 }
-var timer = 75;
-var count = 0;
 
-function counterRender() {
-    if (count <= timer) {
-        counter.innerHTML = count;
-        count++;
-    }
-} 
-    else {
-    count = 0;
-    wrongAnswer();
-    if (runningqIndex < lastqIndex) {
-        runningqIndex++;
-        questionRender();
-    } else {
-        setTimeout(timer - 10);
-    }
-    setInterval(counterRender, 7500);
-
-}
-start = document.getElementById("start").addEventListener("click", startQuiz);
-
-let Timer;
+start.addEventListener("click", startQuiz);
 
 function startQuiz() {
     start.style.display = "none";
-    counterRender();
-    questionRender();
+    renderQuestions();
     quiz.style.display = "block";
 }

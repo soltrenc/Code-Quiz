@@ -29,6 +29,31 @@ p {
 body {
     text-align: center;
     background-color: #eeeeee  ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
 
+}
 
+#timer {
+    float:right;
+}
+
+.answer {
+    color: purple;
+}
+
+#A {
+    color:purple;
+}
+
+#B {
+    color:purple;
+}
+
+#C {
+    color:purple;
+}
+
+#D {
+    color:purple;
 }
